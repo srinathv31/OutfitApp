@@ -1,28 +1,40 @@
 import React from "react";
-import { StyleSheet, Image, Pressable } from "react-native";
+import { StyleSheet, Image, Pressable, ImageBackground } from "react-native";
 
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 import shoe from '../assets/images/Nikes.png';
-import shoeData from '../assets/shoes.json'
-import { FlatList } from "react-native-gesture-handler";
+import shoeData from '../assets/shoesData'
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 export default function ShoesViewer() { 
     
-    return(
-        <View>
+    const renderShoeItem = ({item}) => {
+        return (
             <View style={styles.container}>
-                <Pressable
+                <Pressable 
                 onPress={onPressFunction}
                 style={({ pressed }) => ({
                     opacity: pressed ? 0.5 : 1
-                  })}>
-                    <Image
-                    style={styles.image}
-                    source={shoe}></Image>
+                    })}>
+                    <ImageBackground
+                    source={item.image}
+                    style={styles.image}>
+                    </ImageBackground>
                 </Pressable>
             </View>
+        )
+    }
+
+    return(
+        <View> 
+            <FlatList
+            data={shoeData}
+            renderItem={renderShoeItem}
+            keyExtractor={(item) => item.id.toString()}
+            horizontal
+            showsHorizontalScrollIndicator={false}/>
         </View>
     );
 }
@@ -34,7 +46,7 @@ function onPressFunction(){
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        marginHorizontal: 50,
+        marginHorizontal: 10,
         backgroundColor: '#EEE',
         padding: 10,
         borderRadius: 25

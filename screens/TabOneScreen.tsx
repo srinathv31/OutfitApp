@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import ListOfShoes from '../assets/shoes.json'
+import ListOfShoes from '../assets/shoesData'
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import ShirtViewer from '../components/ShirtView';
